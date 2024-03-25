@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 @Author: Anqi Huang
-@Time: 2024/3/8
+@Time: 2024/3/21
 """
 import argparse
 import json
@@ -58,7 +58,7 @@ def main():
     else:  # load config from corresponding yaml file
         algo_args, env_args = get_defaults_yaml_args(args["algo"], args["env"])
     update_args(unparsed_dict, algo_args, env_args)  # update args from command line
-  # start training
+    # start training
     from ossmc.runners.runner import Runner
 
     runner = Runner(args, algo_args, env_args)

@@ -28,6 +28,7 @@ class Runner:
         self.env_args = env_args
         self.episode_beta = []
         self.episode_messages = []
+        self.num_random = 7
 
         if "policy_freq" in self.algo_args["algo"]:
             self.policy_freq = self.algo_args["algo"]["policy_freq"]
@@ -240,10 +241,9 @@ class Runner:
                 )
 
                 # Construct optimistic Q-value
-                num_random = 7
-                random_actions_tensor = torch.zeros(num_random, len(actions), actions[0].shape[0], sp_available_actions.shape[-1]).to(self.device)
+                random_actions_tensor = torch.zeros(self.num_random, len(actions), actions[0].shape[0], sp_available_actions.shape[-1]).to(self.device)
                 sp_index = torch.FloatTensor(sp_available_actions).to(self.device)
-                for i in range(num_random):
+                for i in range(self.num_random):
                     for j in range(self.num_agents):
                         if j <= agent_id:
                             random_actions_tensor[i, j] = actions[j]
@@ -260,11 +260,6 @@ class Runner:
                 
                 value_pred = self.critic.get_values(sp_share_obs_t, random_actions_tensors_t)
                 value_pred = value_pred.max(dim=0)[0]
-
-                # actions_t = torch.tile(
-                #     torch.cat(actions, dim=-1), (self.num_agents, 1)
-                #         )
-                # value_pred = self.critic.get_values(sp_share_obs, actions_t)
                     
                 if self.algo_args["algo"]["use_policy_active_masks"]:
                     valid_transition = torch.tile(
@@ -330,10 +325,8 @@ class Runner:
         self.done_episodes_rewards = []
         print("start warmup")
         obs, share_obs, available_actions = self.warmup()
-        # obs, share_obs, available_actions = self.envs.reset()
         self.messages = torch.zeros(obs.shape[0], obs.shape[1],
                                      available_actions.shape[-1]).to(self.device)
-        
 
         print(" start training")
 
@@ -442,8 +435,6 @@ class Runner:
         eval_battles_won = 0
 
         episode_lens = []
-        episode_beta = []
-        episode_messages = []
         one_episode_len = np.zeros(
             self.algo_args["eval"]["n_eval_rollout_threads"], dtype=np.int
         )

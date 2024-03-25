@@ -66,7 +66,6 @@ model:
   # critic learning rate
   critic_lr: 0.0005
 algo:
-  mi_loss_weight: 0.001
   # whether to auto-tune temperature
   auto_alpha: True
   # temperature parameter
@@ -93,8 +92,10 @@ algo:
   share_param: False
   # whether to use a fixed optimisation order
   fixed_order: False
-
+  # whether to use motivational communication
   use_comm: True
+  # the mi loss weight
+  mi_loss_weight: 0.001
 logger:
   # logging directory
-  log_dir: C:\haq_project\OSSMC\ossmc\results
+  log_dir: ~
