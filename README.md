@@ -1,6 +1,6 @@
 # Optimistic Sequential Multi-Agent Reinforcement Learning With Motivational Communication
 
-This repository is the implementation of the paper "Optimistic Sequential Multi-Agent Reinforcement Learning With Motivational Communication"[[PDF](10.1016/j.neunet.2024.106547)]. 
+This repository is the implementation of the paper "Optimistic Sequential Multi-Agent Reinforcement Learning With Motivational Communication"[[PDF](https://doi.org/10.1016/j.neunet.2024.106547)]. 
 
 We conduct the experiments using version SC2.4.6.2.69232, which is same as the SMAC run data release (https://github.com/oxwhirl/smac/releases/tag/v1).
 
