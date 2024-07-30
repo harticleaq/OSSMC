@@ -1,4 +1,4 @@
-# DVF: Multi-agent Q-learning with difference value factorization
+# Optimistic Sequential Multi-Agent Reinforcement Learning With Motivational Communication
 
 This repository is the implementation of the paper "Optimistic Sequential Multi-Agent Reinforcement Learning With Motivational Communication"[[PDF](10.1016/j.neunet.2024.106547)]. 
 
